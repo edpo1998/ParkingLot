@@ -1,0 +1,87 @@
+.ModalStyleSalida{
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  transform: translate(-50%,-50%);
+}
+
+.ModalStyle{
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  transform: translate(-50%,-50%);
+}
+
+.btn__conf{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.dashboard {
+    background: linear-gradient(90deg, #16222A 0%, #3A6073 100%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 30px;
+    min-height: calc(100vh - 200px); /* El ancho será igual al tamaño de todo el height menos 200px (100px del header + 100px del footer) */
+  }
+  
+ 
+
+  .dashboard__container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+  }
+  .dashboard__container-bar{
+    color: white;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+  }
+  .dashboard__container-menu{
+    display: grid;
+    grid-template-columns: repeat(3,25%);
+    grid-template-rows: repeat(2,50%);
+    min-height: 60vh;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dashboard__container-item{
+    background: linear-gradient(90deg, #134E5E 0%, #71B280 100%);
+    border-radius: 30px;
+    width:80%;
+    height: 80%;
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .login__container--form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login__container--form label {
+    font-size: 14px;
+  }
+  
+  .btnlogin{
+    background: linear-gradient(90deg, #44A08D 0%, #093637 100%);
+  }
+  
+  .login__container-img{
+    width: 159px;
+    height: 185px;
+  }
+  
+  
