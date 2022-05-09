@@ -13,4 +13,4 @@ RUN pip install -r requirements/base.txt
 EXPOSE 8000
 # docker run -it -p 8000:8000 -v $(pwd)"/usr/src/app simpleapp"
 # docker start -a idcontainer
-ENTRYPOINT gunicorn Test.wsgi:application -w 2 -b 0.0.0.0:8000 --reload
+ENTRYPOINT python manage.py runserver 0.0.0.0:8000
