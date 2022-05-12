@@ -5,7 +5,8 @@ const Conductores = () => (
   <div className='containeroption'>
     <Switch>
        { /*<Route exact path="/admin/usuarios/add" component={addPosicion} />*/}
-        <Route render={(props) => <DefaultAction {...props} name={"👦 Conductores"} />} />
+        <Route 
+          render={(props) => <DefaultAction {...props} name={"👦 Conductores"} />} />
     </Switch>
   </div>
 );

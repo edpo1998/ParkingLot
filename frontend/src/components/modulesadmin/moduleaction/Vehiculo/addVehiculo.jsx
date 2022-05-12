@@ -9,7 +9,7 @@ import {
   } from 'reactstrap'
 import FetchData from '../api/Api';
 
-const addVehiculo = () => {
+const AddVehiculo = ({handleMessage}) => {
 
   // Values 
   const [form,setForm] = useState({
@@ -24,9 +24,23 @@ const addVehiculo = () => {
   const [dataComboBox, setDataComboBox] =  useState({})
 
   const EntryRegister =async (e) =>{
-    const url = "api/vehicles/vehicle/"
-    const data = new FetchData()
-    const datos = await data.request(url,"POST",form)
+    try{
+      const url = "api/vehicles/vehicle/"
+      const data = new FetchData()
+      await data.request(url,"POST",form)
+      handleMessage({
+        header:'🟢 Estado del registro',
+        message:'Vehiculo registrado con exito',
+        state:true
+      })
+    }catch(e){
+      handleMessage({
+        header:'🔴 Estado del registro',
+        message:'Verifica los campos del registro',
+        state:true
+      });
+    }
+    
   }
 
   const handleChange = (e) => {
@@ -129,4 +143,4 @@ const addVehiculo = () => {
 
 );
 }
-export default addVehiculo;
+export default AddVehiculo;

@@ -44,9 +44,7 @@ const UpdateUsuario = ({handleMessage}) => {
         state:true
       });
     }
-    
-
-    }
+  }
 
   const handleChange = (e) => {
     setForm({
@@ -56,7 +54,12 @@ const UpdateUsuario = ({handleMessage}) => {
   }
 
 
-  const handleChangeCbx = (e) => form[e.target.name]= e.target.value
+  const handleChangeCbx = (e) => {
+    setForm({
+        ...form,
+        [e.target.name]: e.target.value,
+    });
+  }
 
   const handleSearch = (e) => {
     setSearch({

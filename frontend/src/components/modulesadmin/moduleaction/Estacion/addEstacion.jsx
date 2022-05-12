@@ -9,7 +9,7 @@ import {
   } from 'reactstrap'
 import FetchData from '../api/Api';
 
-const addEstacion = () => {
+const AddEstacion = ({handleMessage}) => {
 
   // Values 
   const [form,setForm] = useState({
@@ -23,9 +23,22 @@ const addEstacion = () => {
   const [dataComboBox, setDataComboBox] =  useState({})
 
   const EntryRegister =async (e) =>{
-    const url = "api/parqueo/estacion/"
-    const data = new FetchData()
-    const datos = await data.request(url,"POST",form)
+    try{
+      const url = "api/parqueo/estacion/"
+      const data = new FetchData()
+      await data.request(url,"POST",form)
+      handleMessage({
+        header:'🟢 Estado del registro',
+        message:'Estacion registrada con exito',
+        state:true
+      })
+    }catch(e){
+      handleMessage({
+        header:'🔴 Estado del registro',
+        message:'Verifique los campos de la estacion',
+        state:true
+      });
+    }
   }
 
   const handleChange = (e) => {
@@ -129,4 +142,4 @@ const addEstacion = () => {
 
 );
 }
-export default addEstacion;
+export default AddEstacion;

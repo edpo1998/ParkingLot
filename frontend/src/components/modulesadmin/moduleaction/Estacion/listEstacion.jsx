@@ -5,7 +5,7 @@ import {
 import { useEffect,useState } from 'react';
 import FetchData from '../api/Api';
   
-  const listEstacion = () => {
+  const ListEstacion = ({handleMessage}) => {
     const [data,setData] = useState([])
 
     useEffect(  () => {
@@ -20,13 +20,25 @@ import FetchData from '../api/Api';
       },[]);
    
     const deleteRegister = (e) =>{
-        const requestDelete = async () => {
-            const url = "api/parqueo/estacion/"+e.target.value+"/"
-            const data = new FetchData()
-            const datos = await data.request(url,"DELETE")
-            setData(datos)
-          }
-          requestDelete()
+      const requestDelete = async () => {
+        const url = "api/parqueo/estacion/"+e.target.value+"/"
+        const data = new FetchData()
+        const datos = await data.requestmessage(url,"DELETE")
+        console.log(datos)
+        return datos
+      }
+      requestDelete()
+      .then(datos=> handleMessage({
+        header:'🟢 Estado del registro',
+        message:`Estacion eliminada con exito`,
+        state:true
+      }))
+      .catch(error=> handleMessage({
+        header:'🔴 Estado del registro',
+        message:`${error}`,
+        state:true
+      }))
+        
     }
 
     return(
@@ -34,14 +46,15 @@ import FetchData from '../api/Api';
      {
       data.length>0?
       <div className='containeroption__form'>
+        <div className='table-wrapper-scroll-y my-custom-scrollbar'>
         <Table borderless>
             <thead>
             <tr>
                 <th>#</th>
+                <th>Eliminar</th>
                 <th>Estacion</th>
                 <th>Estado</th>
                 <th>Descripcion</th>
-                <th>Eliminar</th>
             </tr>
             </thead>
             <tbody>
@@ -49,19 +62,20 @@ import FetchData from '../api/Api';
                 data.map(registro =>(
                     <tr key={registro.id}>
                         <th scope="row" >{registro.id}</th>
-                        <td>{registro.identificador}</td>
-                        <td >{registro.state}</td>
-                        <td >{registro.description}</td>
                         <td><Button value={registro.id} className="btn-ls bg-danger" onClick={deleteRegister}>Delete</Button></td>
+                        <td>{registro.identificador}</td>
+                        <td >{registro.state?"🔴":"🟢"}</td>
+                        <td >{registro.description}</td>
                     </tr>
                 ))
             }
             </tbody>
         </Table>
+        </div>
       </div>:
       <h1>..Loading</h1>
     }  
     </>
   );
   }
-  export default listEstacion;
+  export default ListEstacion;

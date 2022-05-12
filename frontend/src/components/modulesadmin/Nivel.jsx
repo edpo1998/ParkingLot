@@ -7,10 +7,17 @@ import updateNivel from './moduleaction/Nivel/updateNivel';
 const Nivel = () => (
   <div className='containeroption'>
     <Switch>
-        <Route exact path="/admin/niveles/add" component={addNivel} />
-        <Route exact path="/admin/niveles/update" component={updateNivel} />
-        <Route exact path="/admin/niveles/list" component={listLevel} />
-        <Route render={(props) => <DefaultAction {...props} name={"🔺 Nivel"} />} />
+        <Route 
+            exact path="/admin/niveles/add" 
+            component={addNivel} />
+        <Route 
+            exact path="/admin/niveles/update" 
+            component={updateNivel} />
+        <Route 
+            exact path="/admin/niveles/list" 
+            component={listLevel} />
+        <Route 
+            render={(props) => <DefaultAction {...props} name={"🔺 Nivel"} />} />
     </Switch>
   </div>
 );

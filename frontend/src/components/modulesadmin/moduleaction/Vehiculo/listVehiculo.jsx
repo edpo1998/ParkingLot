@@ -5,7 +5,7 @@ import {
 import { useEffect,useState } from 'react';
 import FetchData from '../api/Api';
   
-  const listVehiculo = () => {
+  const ListVehiculo = () => {
     const [data,setData] = useState([])
 
     useEffect(  () => {
@@ -34,6 +34,7 @@ import FetchData from '../api/Api';
      {
       data.length>0?
       <div className='containeroption__form'>
+        <div className='table-wrapper-scroll-y my-custom-scrollbar'>
         <Table >
             <thead>
             <tr>
@@ -66,10 +67,11 @@ import FetchData from '../api/Api';
             }
             </tbody>
         </Table>
+        </div>
       </div>:
       <h1>..Loading</h1>
     }  
     </>
   );
   }
-  export default listVehiculo;
+  export default ListVehiculo;

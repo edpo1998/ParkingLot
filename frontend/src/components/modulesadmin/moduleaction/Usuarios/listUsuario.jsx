@@ -67,7 +67,7 @@ import {
                         <td>{registro.name}</td>
                         <td >{registro.surname}</td>
                         <td >Falta Implementar endpoint</td>
-                        <td >{registro.rol}</td>
+                        <td >{registro.rol===1?"👮🏽‍♂️":"👷🏽‍♀️"}</td>
                         <td><Button value={registro.id} className="btn-ls bg-danger" onClick={deleteRegister}>Delete</Button></td>
                     </tr>
                 ))

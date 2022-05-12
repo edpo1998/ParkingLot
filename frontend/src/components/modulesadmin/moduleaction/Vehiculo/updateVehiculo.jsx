@@ -9,7 +9,7 @@ import {
   } from 'reactstrap'
 import FetchData from '../api/Api';
 
-const updateVehiculo = () => {
+const UpdateVehiculo = ({handleMessage}) => {
 
   const [dataComboBox, setDataComboBox] =  useState({})
 
@@ -31,11 +31,22 @@ const updateVehiculo = () => {
   
 
   const EntryRegister =async (e) =>{
-
-    const url = "api/vehicles/vehicle/"+form.id+"/"
-    const data = new FetchData()
-    const datos = await data.request(url,"PUT",form)
-  
+    try {
+      const url = "api/vehicles/vehicle/"+form.id+"/"
+      const data = new FetchData()
+      await data.request(url,"PUT",form)
+      handleMessage({
+        header:'🟢 Estado del registro',
+        message:'Vehiculo actualizado con exito',
+        state:true
+      })
+    } catch (error) {
+      handleMessage({
+        header:'🔴 Estado del registro',
+        message:`Error al actualizar el registro`,
+        state:true
+      });
+    }
   }
 
   const handleChange = (e) => {
@@ -46,7 +57,13 @@ const updateVehiculo = () => {
   }
 
 
-  const handleChangeCbx = (e) => form[e.target.name]= e.target.value
+  const handleChangeCbx = (e) => {
+    setForm({
+        ...form,
+        [e.target.name]: e.target.value,
+    });
+  }
+
 
   const handleSearch = (e) => {
     setSearch({
@@ -60,9 +77,10 @@ const updateVehiculo = () => {
           const url = "api/vehicles/vehicle/"+search.id+"/"
           const data = new FetchData()
           const datos = await data.request(url,"GET")
-          setForm(datos)
+          return datos
       }
         getResponse()
+        .then(datos => setForm(datos))
       
   }
   
@@ -163,4 +181,4 @@ const updateVehiculo = () => {
 
 );
 }
-export default updateVehiculo;
+export default UpdateVehiculo;

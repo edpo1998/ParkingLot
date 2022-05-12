@@ -35,6 +35,7 @@ import {
      {
       data.length>0?
       <div className='containeroption__form'>
+        <div className='table-wrapper-scroll-y my-custom-scrollbar'>
         <Table borderless>
             <thead>
             <tr>
@@ -54,13 +55,14 @@ import {
                         <td>{registro.date_open}</td>
                         <td >{registro.date_close}</td>
                         <td >{registro.activo}</td>
-                        <td >{registro.is_active?"En Apertura":"Caja Cerrada"}</td>
+                        <td >{registro.is_active?"✅":"⛔️"}</td>
                         <td>{registro.is_active?<Button value={registro.id} className="btn-ls bg-danger" onClick={closeRegister}>Close</Button>:"Reapertura No disponible"}</td>
                     </tr>
                 ))
             }
             </tbody>
         </Table>
+        </div>
       </div>:
       <h1>..Loading</h1>
     }  

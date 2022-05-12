@@ -1,4 +1,5 @@
-import {
+
+  import {
     Form,
     FormGroup,
     Input,
@@ -9,7 +10,7 @@ import {
   import FetchData from '../api/Api';
 
 
-  const updateEstacion = () => {
+  const UpdateEstacion = ({handleMessage}) => {
 
     const [dataComboBox, setDataComboBox] =  useState({})
     const [search,setSearch] = useState({
@@ -26,9 +27,23 @@ import {
       })
   
     const EntryRegister =async (e) =>{
-      const url = "api/parqueo/estacion/"+form.id+"/"
-      const data = new FetchData()
-      const datos = await data.request(url,"PUT",form)
+      try {
+        const url = "api/parqueo/estacion/"+form.id+"/"
+        const data = new FetchData()
+        await data.request(url,"PUT",form)
+        handleMessage({
+          header:'🟢 Estado del registro',
+          message:'Estacion actualizada con exito',
+          state:true
+        })
+      } catch (error) {
+        handleMessage({
+          header:'🔴 Estado del registro',
+          message:`Ocurrio un error al actualizar el Registro`,
+          state:true
+        });
+      }
+      
     }
   
     const handleChange = (e) => {
@@ -45,7 +60,13 @@ import {
           });
     }
   }
-  const handleChangeCbx = (e) => form[e.target.name]= e.target.value
+  
+  const handleChangeCbx = (e) => {
+    setForm({
+        ...form,
+        [e.target.name]: e.target.value,
+    });
+  }
 
   const handleSearch = (e) => {
         setSearch({
@@ -154,4 +175,4 @@ import {
     </>
   );
   }
-  export default updateEstacion;
+  export default UpdateEstacion;

@@ -8,10 +8,17 @@ import listRol from './moduleaction/Roles/listRol';
 const Roles = () => (
   <div className='containeroption'>
     <Switch>
-        <Route exact path="/admin/roles/add" component={addRol} />
-        <Route exact path="/admin/roles/update" component={updateRol} />
-        <Route exact path="/admin/roles/list" component={listRol} />
-        <Route render={(props) => <DefaultAction {...props} name={"🛃 Roles"} />} />
+        <Route 
+            exact path="/admin/roles/add" 
+            component={addRol} />
+        <Route 
+            exact path="/admin/roles/update" 
+            component={updateRol} />
+        <Route 
+            exact path="/admin/roles/list" 
+            component={listRol} />
+        <Route 
+            render={(props) => <DefaultAction {...props} name={"🛃 Roles"} />} />
     </Switch>
   </div>
 );

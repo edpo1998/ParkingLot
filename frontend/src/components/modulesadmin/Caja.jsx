@@ -6,9 +6,14 @@ import abrirCaja from './moduleaction/Caja/abrirCaja';
 const Caja = () => (
   <div className='containeroption'>
     <Switch>
-        <Route exact path="/admin/caja/list" component={listCaja} />
-        <Route exact path="/admin/caja/open" component={abrirCaja} />
-        <Route render={(props) => <DefaultAction {...props} name={"caja"} />} />
+        <Route 
+            exact path="/admin/caja/list" 
+            component={listCaja} />
+        <Route 
+            exact path="/admin/caja/open" 
+            component={abrirCaja} />
+        <Route 
+            render={(props) => <DefaultAction {...props} name={"caja"} />} />
     </Switch>
   </div>
 );

@@ -7,10 +7,17 @@ import updatePosicion from './moduleaction/Posicion/updatePosicion';
 const Posicion = () => (
   <div className='containeroption'>
     <Switch>
-      <Route exact path="/admin/posiciones/add" component={addPosicion} />
-      <Route exact path="/admin/posiciones/update" component={updatePosicion} />
-      <Route exact path="/admin/posiciones/list" component={listPosicion} />
-      <Route render={(props) => <DefaultAction {...props} name={"⤴️ Posicion"} />} />
+      <Route 
+          exact path="/admin/posiciones/add" 
+          component={addPosicion} />
+      <Route 
+          exact path="/admin/posiciones/update" 
+          component={updatePosicion} />
+      <Route 
+          exact path="/admin/posiciones/list" 
+          component={listPosicion} />
+      <Route 
+          render={(props) => <DefaultAction {...props} name={"⤴️ Posicion"} />} />
     </Switch>
   </div>
 );

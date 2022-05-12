@@ -5,7 +5,8 @@ const Contactos = () => (
   <div className='containeroption'>
     <Switch>
        { /*<Route exact path="/admin/usuarios/add" component={addPosicion} />*/}
-        <Route render={(props) => <DefaultAction {...props} name={"📒 Contactos"} />} />
+        <Route 
+            render={(props) => <DefaultAction {...props} name={"📒 Contactos"} />} />
     </Switch>
   </div>
 );

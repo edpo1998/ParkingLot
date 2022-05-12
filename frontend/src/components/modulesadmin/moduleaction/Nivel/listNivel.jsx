@@ -34,6 +34,7 @@ import {
      {
       data.length>0?
       <div className='containeroption__form'>
+        <div className='table-wrapper-scroll-y my-custom-scrollbar'>
         <Table borderless>
             <thead>
             <tr>
@@ -56,6 +57,7 @@ import {
             }
             </tbody>
         </Table>
+        </div>
       </div>:
       <h1>..Loading</h1>
     }  
