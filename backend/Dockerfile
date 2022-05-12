@@ -1,4 +1,4 @@
-FROM python:3.8.4-slim-buster
+FROM python:3.8.4
 
 ENV PYTHONDONTWRITEBYTECODE 1
 
@@ -13,4 +13,4 @@ RUN pip install -r requirements/base.txt
 EXPOSE 8000
 # docker run -it -p 8000:8000 -v $(pwd)"/usr/src/app simpleapp"
 # docker start -a idcontainer
-RUN python manage.py runserver 0.0.0.0:8000
+CMD python manage.py runserver 0.0.0.0:8000
