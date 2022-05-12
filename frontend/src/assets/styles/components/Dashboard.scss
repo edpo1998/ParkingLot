@@ -1,13 +1,20 @@
 .ModalStyleSalida{
   position: absolute;
-  top: 20%;
+  top: 5%;
   left: 40%;
+  transform: translate(-50%,-50%);
+}
+
+.ModalStyleReporte{
+  position: absolute;
+  top: 5%;
+  left: 25%;
   transform: translate(-50%,-50%);
 }
 
 .ModalStyle{
   position: absolute;
-  top: 20%;
+  top: 5%;
   left: 40%;
   transform: translate(-50%,-50%);
 }
@@ -51,6 +58,7 @@
     min-height: 60vh;
     align-items: center;
     justify-content: center;
+    
   }
 
   .dashboard__container-item{
@@ -63,7 +71,8 @@
     align-items:center;
     justify-content: center;
     gap: 1rem;
-    padding: 1.5rem;
+    padding: 1rem;
+    
   }
   
   .login__container--form {

@@ -5,28 +5,39 @@ import {
   import { useEffect,useState } from 'react';
   import FetchData from '../api/Api';
   
-  const listUsuario = () => {
+  const ListUsuario = ({handleMessage}) => {
     const [data,setData] = useState([])
 
-    useEffect(  () => {
+    useEffect(() => {
         const getResponse = async () => {
-            const url = "api/team/users/"
-            const data = new FetchData()
-            const datos = await data.request(url,"GET")
-            setData(datos)
-          }
-          getResponse()
-        
+          const url = "api/team/users/"
+          const data = new FetchData()
+          const datos = await data.request(url,"GET")
+          return datos
+        }
+        getResponse()
+        .then(datos=> setData(datos))
+        .catch(error=>setData([]))
       },[]);
    
     const deleteRegister = (e) =>{
         const requestDelete = async () => {
             const url = "api/team/users/"+e.target.value+"/"
             const data = new FetchData()
-            const datos = await data.request(url,"DELETE")
-            setData(datos)
+            const datos = await data.requestmessage(url,"DELETE")
+            return datos
           }
           requestDelete()
+          .then(datos=> handleMessage({
+            header:'🟢 Estado del registro',
+            message:`Usuario eliminado con exito`,
+            state:true
+          }))
+          .catch(error=> handleMessage({
+            header:'🔴 Estado del registro',
+            message:`${error}`,
+            state:true
+          }))
     }
 
     return(
@@ -69,4 +80,4 @@ import {
     </>
   );
   }
-  export default listUsuario;
+  export default ListUsuario;

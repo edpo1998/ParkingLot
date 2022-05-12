@@ -31,6 +31,20 @@ class VehicleViewSet(viewsets.ModelViewSet):
     queryset =  models_vehicle.Vehicle.objects.all()
     serializer_class = serializer_vehicle.VehicleSerializer
 
+    def destroy(self, request, *args, **kwargs):
+        try:
+            vehiculo = self.get_object()
+            vehiculo.is_active = False
+            vehiculo.save()
+            return Response({
+                "error": False,
+                "message": "Vehiculo dado de baja"
+                })
+        except:
+            return Response({
+                "error": False,
+                "message": "Ocurrio un error al dar de baja al vehiculo"
+                })
 
 
 

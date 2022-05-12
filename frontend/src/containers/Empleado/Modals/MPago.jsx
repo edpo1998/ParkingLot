@@ -1,93 +1,98 @@
+// React
 import React,{useState,useEffect} from 'react';
+// Componentes
 import {
   Button,
-  Form,
-  FormGroup,
-  Input,
   Modal, ModalHeader, ModalBody, ModalFooter,
   Label,
-  } from 'reactstrap'
-
+} from 'reactstrap'
+// Estilos
 import "./styles/MRSalida.scss"
+// Api
 import api_parqueo from "../../../services/api.register.js"
 
+
+
 const MPago = ({stateopen,handlechangeModal}) => {
-    const [data,setData] = useState({})
-    const [form,setForm] = useState({
-        valsearch:''
-      })
-      
+    // Arreglo de tickets residentes
+    const [data,setData] = useState([])
+
+    // Mensaje de la respuesta del pago
+    const [message,setMessage] = useState({})
+
+    // Al iniciar se cargan los campos 
     useEffect( () => {
         const getResponse = async () => {
-          const response = await api_parqueo.estacion.getReporte()
+          const response = await api_parqueo.estacion.getResidentes()
           return response
         }
         getResponse()
-        .then(response => setData(response.body))
+        .then(response => setData(response))
         .catch(data => console.log(data))
       },[]);
-    
-      const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-          });
+      
+    // Cerrar el modal
+    const EntryRegister =() => {
+      const getResponse = async () => {
+        const response = await api_parqueo.estacion.pagarResidentes()
+        return response
       }
-    const EntryRegister =async (e) => handlechangeModal("pays",false)
+      getResponse()
+      .then(response => {
+        setMessage({
+          error: response.error,
+          message: response.message
+        })
+      })
+      .catch(data => console.log(data))
+    }
 
   return(
-  <>{
-    data.length>0?
-    <Modal isOpen={stateopen} className="ModalStyleSalida">
+  <>
+      
+    <Modal isOpen={stateopen} className="ModalStyleReporte" size="lg" style={{maxWidth: '1000px', width: '100%'}}>
       <ModalHeader>
         Realizar Pago
       </ModalHeader> 
-     
+      
       <ModalBody className='FormModal'>
+      {
+          Object.keys(message).length>0?
+          <p className={message.error?"alert mt-2 alert-danger":"alert mt-2 alert-success"}>{message.message}</p>:
+          ""
+      }
         <div className='table-wrapper-scroll-y my-custom-scrollbar'>
-            <FormGroup>
-                <Label>Buscar</Label>
-                <Input name="valsearch" onChange={handleChange}></Input> 
-            </FormGroup>
             <table className="table table-bordered table-striped mb-0">
                 <thead>
                     <tr>
-                        <th scope="col" >Ticket</th>
+                        <th scope="col" >No. Ticket</th>
                         <th scope="col">No. Placa</th>
-                        <th scope="col">Parqueo Asignado</th>
-                        <th scope="col">Datos de Ingreso</th>
-                        <th scope="col">Datos de Egreso</th>
-                        <th scope="col">Tiempo Estimado</th>
-                        <th scope="col">Valor Aproximado</th>
+                        <th scope="col">Conductor</th>
+                        <th scope="col">Dpi</th>
+                        <th scope="col">Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        data.map(registro =>{
-                            if(registro.mes_activo==true){
-                                return(<tr key={registro.id}>
-                                    <th scope="row" >{registro.ticket}</th>
-                                    <td>{registro.vehiculo}</td>
-                                    <td>{registro.estacion}</td>
-                                    <td >{registro.date_entry}</td>
-                                    <td>{registro.date_exit}</td>
-                                    <td>{registro.tiempo}</td>
-                                    <td>{registro.precio}</td>
-                                </tr>)
-                            }
-                        })
+                        data.map(registro =>
+                          <tr key={registro.id}>
+                              <th scope="row" >{registro.id}</th>
+                              <td>{registro.vehiculo}</td>
+                              <td>{registro.namedriver}</td>
+                              <td>{registro.dpi}</td>
+                              <td >{registro.total}</td>
+                          </tr>
+                        )
                     }
                 </tbody>
             </table>
-            <Label>Total: {data.map(e=>{return(e.precio?e.precio:0)}).reduce((p, c) => p + c)}</Label>
         </div>
       </ModalBody>
       <ModalFooter>
         <Button className="btn-ls bg-dark btncustom" onClick={EntryRegister}> Pagar</Button>
+        <Button className="btn-lg bg-primary btnclose" onClick={()=>handlechangeModal("pays",false)}>⬅️</Button>
       </ModalFooter>
-    </Modal> :
-    <h1>Loading...</h1>
-  } 
+    </Modal> 
   </>
 
 );

@@ -45,7 +45,8 @@ class Vehicle(models.Model):
     typevehicle =  models.ForeignKey(TypeVehicle, on_delete=models.CASCADE,blank=True, null=True)
     typepropietary =  models.ForeignKey(TypePropietary, on_delete=models.CASCADE,blank=True, null=True)
     description = models.CharField(max_length=150,blank=True,null=True)
-
+    state = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     def __str__(self):
         return self.badgenumber
 
@@ -53,5 +54,12 @@ class Vehicle(models.Model):
 class ExtensionVehicle(Vehicle):
     class Meta:
         proxy = True
+          
+
+    def verifyActive(self):
+        if(self.is_active==True):
+            return True
+        else:
+            return False
 
         

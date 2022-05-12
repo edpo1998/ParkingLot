@@ -1,11 +1,12 @@
 
-import "../containers/Unauthorized"
 import Unauthorized from "../containers/Unauthorized";
-const PrivateRoute = ({ component: RouteComponent,role}) => {
-    const auth = role=="admin"?true:false;
-    return (
-        auth ? (<RouteComponent/>) : (<Unauthorized></Unauthorized>)
-    );
-}
+import { authUser } from "../utils/auth";
 
+const PrivateRoute = ({ component: RouteComponent,role}) => {
+    const auth = authUser();
+    if(auth.rol == role){
+        return <RouteComponent></RouteComponent>
+    }
+    return <Unauthorized />
+}
 export default PrivateRoute;

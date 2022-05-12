@@ -9,11 +9,21 @@ from rest_framework import serializers
 from ticket import models as ticket_models
 from estacion import serializer as estacion_serializers
 from vehicle import models as vehicle_models
+from vehicle import serializer as serializer_vehicle
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = ticket_models.Ticket
         fields = '__all__'
 
+class TicketResidenteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ticket_models.Ticket
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['vehiculo'] = serializer_vehicle.VehicleSerializer(instance.vehicle).data['badgenumber']
+        return response
 
 class RegistroSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,7 +45,7 @@ class RegistroDisplaySerializer(serializers.ModelSerializer):
         response['id_vehiculo'] = id_vehiculo
         vehiculo = vehicle_models.Vehicle.objects.all().filter(id=id_vehiculo).first()
         response['vehiculo'] = str(vehiculo)
-        
+        response['tipo'] = str(vehiculo.typepropietary)
         
         return response
 

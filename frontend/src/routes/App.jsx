@@ -5,30 +5,16 @@ import Login from '../containers/Login';
 import NotFound from '../containers/NotFound';
 import Dashboard from '../containers/Empleado/Dashboard';
 import ManageDashBoard from '../containers/Administrador/ManageDashBoard';
-import Unauthorized from '../containers/Unauthorized';
+import { verifyRol,isLogged } from '../utils/auth.js';
 
-function session(){
-  const isLogin = sessionStorage.getItem("session")? JSON.parse(sessionStorage['session']): undefined;
-
-  if(isLogin){
-    if(isLogin.role=="admin"){
-      return <Route path="/admin" component={ManageDashBoard} />
-    }else{
-      return (
-          <Route exact path="/empleado" component={Dashboard} />
-      )
-    }
-  }
-
-}
 const App = () => {
-  const isLogin = sessionStorage.getItem("session")? JSON.parse(sessionStorage['session']): undefined;
   return(
   <BrowserRouter>
     <Layout>
       <Switch>
-        {isLogin?'':<Route exact path="/" component={Login} />}
-        {session(isLogin) }
+        <Route exact path="/" component={isLogged(Login)} />
+        <Route path="/admin" component={verifyRol(["admin"],ManageDashBoard)} />
+        <Route path="/empleado" component={verifyRol(["admin","empleado"],Dashboard)} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

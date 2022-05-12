@@ -7,9 +7,12 @@ from ticket import views as ticketViews
 
 router = routers.DefaultRouter()
 router.register('ticket',ticketViews.TicketViewSet)
-router.register('registro',ticketViews.RegistroViewSet)
-router.register('display',ticketViews.ListRegisterBussy)
+router.register('registro',ticketViews.RegistroViewSet,basename="todos los registros")
+router.register('display',ticketViews.ListRegisterBussy,basename="ocupados")
 router.register('detail',ticketViews.DetailTicket,basename="registros")
+router.register('seebussy',ticketViews.SeeBussy,basename="seebussy")
+router.register('residente',ticketViews.TicketResidenteViewSet,basename="residentes")
+
 
 
 

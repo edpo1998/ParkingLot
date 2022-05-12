@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '../components/Header';
 const Unauthorized = () => {
@@ -6,7 +7,7 @@ const Unauthorized = () => {
   <>
   <Header></Header>
   <div className='containeroption'>
-    <h1>⛔️ Acceso Restringido</h1>
+    <h1>⛔️ Acceso No authorizado</h1>
   </div>
   </>
 );

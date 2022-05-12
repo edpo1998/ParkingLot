@@ -35,13 +35,12 @@ const Header = props => {
             <img src={gravatar(JSON.parse(sessionStorage['session']).email)} alt={JSON.parse(sessionStorage['session']).email} /> :
             <img src={userIcon} alt="" />
           }
-          <p>Perfil</p>
+          {hasUser ?
+            <p>{JSON.parse(sessionStorage['session']).name}</p>
+            : <p>Perfil</p>
+          }
         </div>
         <ul>
-          {hasUser ?
-            <li><a href="/">{JSON.parse(sessionStorage['session']).name}</a></li> 
-            : null
-          }
           {hasUser ? 
             <li><a href="/" onClick={handleLogout}>Cerrar Sesión</a></li>
             :

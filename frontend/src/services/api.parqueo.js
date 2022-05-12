@@ -32,6 +32,7 @@ const api_parqueo ={
           method: 'GET'
         });
        },
+      
    },
 }
 

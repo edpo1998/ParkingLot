@@ -24,7 +24,7 @@ import FetchData from '../api/Api';
             const url = "api/vehicles/vehicle/"+e.target.value+"/"
             const data = new FetchData()
             const datos = await data.request(url,"DELETE")
-            setData(datos)
+            //setData(datos)
           }
           requestDelete()
     }
@@ -34,10 +34,11 @@ import FetchData from '../api/Api';
      {
       data.length>0?
       <div className='containeroption__form'>
-        <Table borderless>
+        <Table >
             <thead>
             <tr>
                 <th>#</th>
+                <th>Estado</th>
                 <th>Numero de placa</th>
                 <th>modelo</th>
                 <th>marca</th>
@@ -52,13 +53,14 @@ import FetchData from '../api/Api';
                 data.map(registro =>(
                     <tr key={registro.id}>
                         <th scope="row" >{registro.id}</th>
+                        <td >{registro.is_active?'🟢':'🔴'}</td>
                         <td>{registro.badgenumber}</td>
                         <td >{registro.modelo}</td>
                         <td >{registro.brand}</td>
                         <td >{registro.typevehicle}</td>
-                        <td >{registro.state}</td>
                         <td >{registro.typepropietary}</td>
-                        <td><Button value={registro.id} className="btn-ls bg-danger" onClick={deleteRegister}>Delete</Button></td>
+                        <td >{registro.description}</td>
+                        <td><Button value={registro.id} className="btn-ls bg-danger" onClick={deleteRegister}>Dar de Baja</Button></td>
                     </tr>
                 ))
             }

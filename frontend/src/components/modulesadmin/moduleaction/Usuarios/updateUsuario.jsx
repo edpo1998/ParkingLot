@@ -8,13 +8,13 @@ import {
   } from 'reactstrap'
 import FetchData from '../api/Api';
 
-const updateUsuario = () => {
+const UpdateUsuario = ({handleMessage}) => {
 
-    const [dataComboBox, setDataComboBox] =  useState({})
+  const [dataComboBox, setDataComboBox] =  useState({})
 
-    const [search,setSearch] = useState({
-        id:'',
-      })
+  const [search,setSearch] = useState({
+    id:'',
+  })
 
   // Values 
   const [form,setForm] = useState({
@@ -28,12 +28,24 @@ const updateUsuario = () => {
  
 
   const EntryRegister =async (e) =>{
-    /*
-    const url = "api/parqueo/estacion/"+form.id+"/"
-    const data = new FetchData()
-    const datos = await data.request(url,"PUT",form)
-    */
-    console.log(form)
+    try {
+      const url = "api/team/users/"+form.id+"/"
+      const data = new FetchData()
+      await data.request(url,"PUT",form)
+      handleMessage({
+        header:'🟢 Estado del registro',
+        message:'Usuario actualizado con exito',
+        state:true
+      })
+    } catch (error) {
+      handleMessage({
+        header:'🔴 Estado del registro',
+        message:`${error}`,
+        state:true
+      });
+    }
+    
+
     }
 
   const handleChange = (e) => {
@@ -58,10 +70,17 @@ const updateUsuario = () => {
         const getResponse = async () => {
             const url = "api/team/users/"+search.id+"/"
             const data = new FetchData()
-            const datos = await data.request(url,"GET")
-            setForm(datos)
+            const response = await data.request(url,"GET")
+            return response
         }
-          getResponse()
+
+        getResponse()
+        .then(response => setForm(response))
+        .catch(error=> handleMessage({
+          header:'🔴 Busqueda de usuario',
+          message:`Usuario Inexistente`,
+          state:true
+        }))
         
     }
 
@@ -133,4 +152,4 @@ const updateUsuario = () => {
 
 );
 }
-export default updateUsuario;
+export default UpdateUsuario;

@@ -16,9 +16,10 @@ async function callApi(endpoint, options = {}) {
 
 const api_parqueo ={
    estacion:{
-       getRegisterBussy(){
-        return callApi('api/registros/display/', {
-          method: 'GET'
+       getRegisterBussy(id){
+        return callApi('api/registros/seebussy/', {
+          method: 'POST',
+          body: JSON.stringify(id),
         });
        },
        registrarSalida(salida){
@@ -31,7 +32,17 @@ const api_parqueo ={
         return callApi('api/registros/detail/', {
           method: 'GET'
         });
-      }
+      },
+      getResidentes(){
+        return callApi('api/registros/residente/', {
+          method: 'GET'
+        });
+       },
+       pagarResidentes(){
+        return callApi('api/registros/ticket/', {
+          method: 'GET'
+        });
+       },
    },
 }
 

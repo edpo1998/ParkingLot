@@ -8,7 +8,7 @@ import {
   } from 'reactstrap'
 import FetchData from '../api/Api';
 
-const addUsuario = () => {
+const AddUsuario = ({handleMessage}) => {
 
   // Values 
   const [form,setForm] = useState({
@@ -22,9 +22,22 @@ const addUsuario = () => {
   const [dataComboBox, setDataComboBox] =  useState({})
 
   const EntryRegister =async (e) =>{
-    const url = "api/team/users/"
-    const data = new FetchData()
-    const datos = await data.request(url,"POST",form)
+    try{
+      const url = "api/team/users/"
+      const data = new FetchData()
+      await data.request(url,"POST",form)
+      handleMessage({
+        header:'🟢 Estado del registro',
+        message:'Usuario registrado con exito',
+        state:true
+      })
+    }catch(e){
+      handleMessage({
+        header:'🔴 Estado del registro',
+        message:'Verifica los campos del registro',
+        state:true
+      });
+    }
   }
 
   const handleChange = (e) => {
@@ -98,4 +111,4 @@ const addUsuario = () => {
 
 );
 }
-export default addUsuario;
+export default AddUsuario;

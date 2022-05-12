@@ -21,7 +21,7 @@ const Dashboard = props => {
     bussy: false,
     mounth: false,
     pays:false,
-    box:false
+    box:false,
   })
 
   const handlechangeModal= (name,value)=>{
@@ -30,6 +30,7 @@ const Dashboard = props => {
         [name]:value,
     })
   }
+
 
   return (
     <>
@@ -62,7 +63,7 @@ const Dashboard = props => {
                 <MenuItem 
                   modal="bussy" 
                   imgitem={prohibido} 
-                  detail={`Estacionamientos\nocupados`} 
+                  detail={`Ocupados`} 
                   handlechangeModal={handlechangeModal}
                 />
 

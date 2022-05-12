@@ -1,2 +1,4 @@
 **/venv
 **/noded_modules
+**/__pycache__
+**/migrations

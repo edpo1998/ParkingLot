@@ -1,7 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
-
-
+import "../assets/styles/components/ModalItem.scss"
 
 const MenuItem = ({modal,imgitem,detail="Default",handlechangeModal}) =>{
 
@@ -11,9 +9,11 @@ const MenuItem = ({modal,imgitem,detail="Default",handlechangeModal}) =>{
 
   return (
     <>
-      <div className='dashboard__container-item'> 
-        <img width={'50%'} height={'60%'} src={imgitem}></img>
-        <button type="button"  className="btn btn-dark btn-lg" onClick={onclickModal}>{detail}</button>
+      <div className='dashboard__container-item '> 
+        <div width={'100%'} height={'80%'}className="container" ><img src={imgitem}></img></div>
+        <button className="btn btn-dark btn-sm  responsive-width" onClick={onclickModal}>
+           {detail}
+        </button>
       </div>
     </>
   );
