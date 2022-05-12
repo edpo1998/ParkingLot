@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-=yhz)yz$p&xu*355f(9v+n&ocj1ljhpt85tyn5p_(*-ln&y(yq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['parkback-rpxonlqsoa-uc.a.run.app', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
@@ -65,13 +66,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS= True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'https://parkback-rpxonlqsoa-uc.a.run.app/'
-    'parkback-rpxonlqsoa-uc.a.run.app'
 ]
 CORS_ORIGIN_REGEX_WHITELIST = [
     'http://localhost:3000',
-    'https://parkback-rpxonlqsoa-uc.a.run.app/'
-    'parkback-rpxonlqsoa-uc.a.run.app'
 ]
 
 ROOT_URLCONF = 'backend.urls'
