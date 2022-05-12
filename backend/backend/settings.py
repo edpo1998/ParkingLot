@@ -65,9 +65,11 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS= True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'https://parkback-rpxonlqsoa-uc.a.run.app/'
 ]
 CORS_ORIGIN_REGEX_WHITELIST = [
     'http://localhost:3000',
+    'https://parkback-rpxonlqsoa-uc.a.run.app/'
 ]
 
 ROOT_URLCONF = 'backend.urls'
